@@ -56,13 +56,16 @@ Create a PostgreSQL connection for vectors in `config/database.php`:
 Configure environment variables in `.env`:
 
 ```env
-RAG_EMBEDDING_PROVIDER=gemini
+EMBEDDING_PROVIDER=gemini
+GEMINI_API_KEY=your-key-here
+GEMINI_EMBEDDING_MODEL=gemini-embedding-001
+GEMINI_EMBEDDING_DIMENSIONS=768
+
 RAG_VECTOR_CONNECTION=pgsql_vector
 RAG_DOCUMENTS_CONNECTION=mysql
 RAG_MIN_SIMILARITY=0.45
 RAG_ARABIC_MIN_SIMILARITY=0.30
-RAG_EMBEDDING_DIMENSIONS=768
-RAG_CHUNK_SIZE=1000
+RAG_MAX_CHUNK_CHARS=3000
 RAG_CHUNK_OVERLAP=200
 RAG_MAX_SEARCH_RESULTS=10
 RAG_STORAGE_DISK=rag_documents
@@ -246,7 +249,7 @@ $chunksCreated = $indexer->index($document, $text);
 
 3. **Batch Imports** for large document sets:
    ```bash
-   php artisan rag:batch-index /path/to/documents
+   php artisan rag:embed-documents
    ```
 
 4. **Tune Similarity Threshold** based on your documents:

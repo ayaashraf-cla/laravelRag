@@ -24,7 +24,7 @@ class DocumentEmbeddingIndexer
             return 0;
         }
 
-        $batchSize = max(1, (int) config('services.embeddings.batch_size', 64));
+        $batchSize = max(1, (int) config('rag.embedding_batch_size', 64));
         $position = 0;
 
         $document->chunks()->delete();

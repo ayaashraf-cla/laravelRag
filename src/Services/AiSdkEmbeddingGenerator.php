@@ -26,9 +26,9 @@ class AiSdkEmbeddingGenerator implements EmbeddingGenerator
             return [];
         }
 
-        $provider = strtolower((string) config('services.embeddings.provider', config('ai.default_for_embeddings', 'openai')));
-        $model = $this->model ?: config("services.$provider.embedding_model");
-        $dimensions = $this->dimensions ?? config("services.$provider.embedding_dimensions");
+        $provider = strtolower((string) config('rag.embedding_provider', 'gemini'));
+        $model = $this->model ?: config('rag.embedding_model');
+        $dimensions = $this->dimensions ?? config('rag.embedding_dimensions');
 
         // if ($provider === 'gemini' && is_string($model) && str_starts_with($model, 'models/')) {
         //     $model = substr($model, 7);
@@ -49,9 +49,7 @@ class AiSdkEmbeddingGenerator implements EmbeddingGenerator
 
     public function model(): string
     {
-        $provider = strtolower((string) config('services.embeddings.provider', 'openai'));
-
-        return $this->model ?: (string) config("services.$provider.embedding_model", $provider);
+        return $this->model ?: (string) config('rag.embedding_model', 'gemini-embedding-001');
     }
 }   
 

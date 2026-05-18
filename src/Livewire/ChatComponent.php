@@ -120,7 +120,7 @@ class ChatComponent extends Component
      * Processes raw Vector DB chunks and converts them to human-readable UI metrics.     */
     private function captureRetrievalAnalysis(Collection $chunks, array $metadata): void
     {
-        $threshold = (float) ($metadata['threshold'] ?? config('services.rag.min_similarity', 0.45));
+        $threshold = (float) ($metadata['threshold'] ?? config('rag.min_similarity', 0.45));
         $vectorSearchMs = round((float) ($metadata['vector_search_ms'] ?? 0), 2);
         // Fallback state if the database returned zero matching items above our threshold
         if ($chunks->isEmpty()) {
@@ -226,7 +226,7 @@ class ChatComponent extends Component
             ],
             'retrieval' => [
                 'chunk_count' => 0,
-                'threshold' => config('services.rag.min_similarity', 0.45),
+                'threshold' => config('rag.min_similarity', 0.45),
                 'average_similarity' => null,
                 'chunks' => [],
             ],
@@ -243,18 +243,15 @@ class ChatComponent extends Component
      */
     private function chatProviders(): array
     {
-        $providers = config('services.rag.chat_providers', ['openai', 'gemini']);
+        $provider = config('rag.chat.provider', 'gemini');
+        $providers = is_array($provider) ? $provider : [$provider];
 
-        if (! is_array($providers) || $providers === []) {
-            return ['openai', 'gemini'];
-        }
-
-        return array_values(array_filter($providers, static fn(mixed $provider): bool => is_string($provider) && $provider !== ''));
+        return array_values(array_filter($providers, static fn(mixed $p): bool => is_string($p) && $p !== '')) ?: ['gemini'];
     }
 
     private function chatTimeout(): int
     {
-        return max(5, (int) config('services.rag.chat_timeout', 20));
+        return max(5, (int) config('rag.chat.timeout', 40));
     }
 
     private function friendlyError(Throwable $exception): string
