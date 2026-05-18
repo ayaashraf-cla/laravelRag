@@ -1,6 +1,6 @@
 <?php
 
-namespace YourVendor\LaravelRag\Livewire;
+namespace AyaAshraf\LaravelRag\Livewire;
 
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
@@ -8,9 +8,9 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Throwable;
-use YourVendor\LaravelRag\Enums\DocumentStatus;
-use YourVendor\LaravelRag\Jobs\ProcessDocumentForRag;
-use YourVendor\LaravelRag\Models\Document;
+use AyaAshraf\LaravelRag\Enums\DocumentStatus;
+use AyaAshraf\LaravelRag\Jobs\ProcessDocumentForRag;
+use AyaAshraf\LaravelRag\Models\Document;
 
 #[Layout('rag::components.layouts.app')]
 class DocumentUploader extends Component

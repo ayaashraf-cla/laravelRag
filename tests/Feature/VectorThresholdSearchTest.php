@@ -1,8 +1,8 @@
 <?php
 
-use YourVendor\LaravelRag\Enums\DocumentStatus;
-use YourVendor\LaravelRag\Models\Document;
-use YourVendor\LaravelRag\Models\DocumentChunk;
+use AyaAshraf\LaravelRag\Enums\DocumentStatus;
+use AyaAshraf\LaravelRag\Models\Document;
+use AyaAshraf\LaravelRag\Models\DocumentChunk;
 
 it('filters chunks precisely using dynamic similarity thresholds and vector distances', function () {
     // 1. Establish our baseline search vector (1536 dimensions)

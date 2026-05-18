@@ -1,7 +1,7 @@
 <?php
 
-use YourVendor\LaravelRag\Agents\DocumentSearchAgent;
-use YourVendor\LaravelRag\Livewire\ChatComponent;
+use AyaAshraf\LaravelRag\Agents\DocumentSearchAgent;
+use AyaAshraf\LaravelRag\Livewire\ChatComponent;
 use Livewire\Livewire;
 
 it('renders the generated answer after asking a question', function () {

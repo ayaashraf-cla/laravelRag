@@ -17,7 +17,7 @@ A production-ready **Retrieval-Augmented Generation (RAG)** package for Laravel 
 ## Installation
 
 ```bash
-composer require yourvendor/laravel-rag
+composer require AyaAshraf/laravel-rag
 ```
 
 ## Publishing Assets
@@ -87,8 +87,8 @@ RAG_CHAT_TIMEOUT=120
 ### Programmatic Usage
 
 ```php
-use YourVendor\LaravelRag\Agents\DocumentSearchAgent;
-use YourVendor\LaravelRag\Models\Document;
+use AyaAshraf\LaravelRag\Agents\DocumentSearchAgent;
+use AyaAshraf\LaravelRag\Models\Document;
 
 // Query documents with streaming
 $stream = DocumentSearchAgent::make()
@@ -106,7 +106,7 @@ $chunks = $docs->first()->chunks;
 ### With Callback Hooks
 
 ```php
-use YourVendor\LaravelRag\Agents\DocumentSearchAgent;
+use AyaAshraf\LaravelRag\Agents\DocumentSearchAgent;
 
 $stream = DocumentSearchAgent::make()
     ->onChunksFound(function ($chunks, $metadata) {
@@ -193,7 +193,7 @@ All options can be set via `config/rag.php` or `.env` variables:
 Create your own embedding implementation:
 
 ```php
-use YourVendor\LaravelRag\Services\EmbeddingGenerator;
+use AyaAshraf\LaravelRag\Services\EmbeddingGenerator;
 
 class CustomEmbeddingGenerator implements EmbeddingGenerator
 {
@@ -216,9 +216,9 @@ $this->app->bind(EmbeddingGenerator::class, CustomEmbeddingGenerator::class);
 ### Manual Document Processing
 
 ```php
-use YourVendor\LaravelRag\Models\Document;
-use YourVendor\LaravelRag\Services\DocumentTextExtractor;
-use YourVendor\LaravelRag\Services\DocumentEmbeddingIndexer;
+use AyaAshraf\LaravelRag\Models\Document;
+use AyaAshraf\LaravelRag\Services\DocumentTextExtractor;
+use AyaAshraf\LaravelRag\Services\DocumentEmbeddingIndexer;
 
 $extractor = app(DocumentTextExtractor::class);
 $indexer = app(DocumentEmbeddingIndexer::class);

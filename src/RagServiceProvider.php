@@ -1,14 +1,14 @@
 <?php
 
-namespace YourVendor\LaravelRag;
+namespace AyaAshraf\LaravelRag;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use YourVendor\LaravelRag\Livewire\ChatComponent;
-use YourVendor\LaravelRag\Livewire\DocumentUploader;
-use YourVendor\LaravelRag\Services\AiSdkEmbeddingGenerator;
-use YourVendor\LaravelRag\Services\DocumentChunker;
-use YourVendor\LaravelRag\Services\EmbeddingGenerator;
+use AyaAshraf\LaravelRag\Livewire\ChatComponent;
+use AyaAshraf\LaravelRag\Livewire\DocumentUploader;
+use AyaAshraf\LaravelRag\Services\AiSdkEmbeddingGenerator;
+use AyaAshraf\LaravelRag\Services\DocumentChunker;
+use AyaAshraf\LaravelRag\Services\EmbeddingGenerator;
 
 class RagServiceProvider extends ServiceProvider
 {
@@ -45,7 +45,7 @@ class RagServiceProvider extends ServiceProvider
         // Register package Artisan commands
         if ($this->app->runningInConsole()) {
             $this->commands([
-                \YourVendor\LaravelRag\Commands\EmbedDocumentsCommand::class,
+                \AyaAshraf\LaravelRag\Commands\EmbedDocumentsCommand::class,
             ]);
         }
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace YourVendor\LaravelRag\Models;
+namespace AyaAshraf\LaravelRag\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use YourVendor\LaravelRag\Enums\DocumentStatus;
+use AyaAshraf\LaravelRag\Enums\DocumentStatus;
 #[Fillable([
     'original_name',
     'disk',

@@ -1,13 +1,13 @@
 <?php
 
-use YourVendor\LaravelRag\Enums\DocumentStatus;
-use YourVendor\LaravelRag\Jobs\ProcessDocumentForRag;
-use YourVendor\LaravelRag\Livewire\DocumentUploader;
-use YourVendor\LaravelRag\Models\Document;
-use YourVendor\LaravelRag\Models\DocumentChunk;
-use YourVendor\LaravelRag\Services\DocumentEmbeddingIndexer;
-use YourVendor\LaravelRag\Services\DocumentTextExtractor;
-use YourVendor\LaravelRag\Services\EmbeddingGenerator;
+use AyaAshraf\LaravelRag\Enums\DocumentStatus;
+use AyaAshraf\LaravelRag\Jobs\ProcessDocumentForRag;
+use AyaAshraf\LaravelRag\Livewire\DocumentUploader;
+use AyaAshraf\LaravelRag\Models\Document;
+use AyaAshraf\LaravelRag\Models\DocumentChunk;
+use AyaAshraf\LaravelRag\Services\DocumentEmbeddingIndexer;
+use AyaAshraf\LaravelRag\Services\DocumentTextExtractor;
+use AyaAshraf\LaravelRag\Services\EmbeddingGenerator;
 // use App\Services\OpenAiEmbeddingGenerator;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;

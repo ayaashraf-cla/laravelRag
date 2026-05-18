@@ -1,8 +1,8 @@
 <?php
 
-namespace YourVendor\LaravelRag\Tests\Fakes;
+namespace AyaAshraf\LaravelRag\Tests\Fakes;
 
-use YourVendor\LaravelRag\Services\EmbeddingGenerator;
+use AyaAshraf\LaravelRag\Services\EmbeddingGenerator;
 
 /**
  * Returns deterministic unit-length vectors so tests never hit the Gemini API.

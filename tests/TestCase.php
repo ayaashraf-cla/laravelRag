@@ -1,13 +1,13 @@
 <?php
 
-namespace YourVendor\LaravelRag\Tests;
+namespace AyaAshraf\LaravelRag\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use YourVendor\LaravelRag\RagServiceProvider;
-use YourVendor\LaravelRag\Services\EmbeddingGenerator;
-use YourVendor\LaravelRag\Tests\Fakes\FakeEmbeddingGenerator;
+use AyaAshraf\LaravelRag\RagServiceProvider;
+use AyaAshraf\LaravelRag\Services\EmbeddingGenerator;
+use AyaAshraf\LaravelRag\Tests\Fakes\FakeEmbeddingGenerator;
 
 abstract class TestCase extends BaseTestCase
 {

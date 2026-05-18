@@ -1,11 +1,11 @@
 <?php
 
-namespace YourVendor\LaravelRag\Commands;
+namespace AyaAshraf\LaravelRag\Commands;
 
 use Illuminate\Console\Command;
-use YourVendor\LaravelRag\Enums\DocumentStatus; // Note: See the architectural tip below regarding these imports
-use YourVendor\LaravelRag\Models\Document;
-use YourVendor\LaravelRag\Services\DocumentEmbeddingIndexer;
+use AyaAshraf\LaravelRag\Enums\DocumentStatus; // Note: See the architectural tip below regarding these imports
+use AyaAshraf\LaravelRag\Models\Document;
+use AyaAshraf\LaravelRag\Services\DocumentEmbeddingIndexer;
 
 class EmbedDocumentsCommand extends Command
 {

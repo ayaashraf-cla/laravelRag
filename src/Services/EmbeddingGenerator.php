@@ -1,6 +1,6 @@
 <?php
 
-namespace YourVendor\LaravelRag\Services;
+namespace AyaAshraf\LaravelRag\Services;
 
 /**
  * Base interface for embedding generation.
