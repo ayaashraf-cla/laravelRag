@@ -1,0 +1,15 @@
+/vendor/
+/node_modules/
+.DS_Store
+.env
+.env.local
+*.log
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.phpunit.result.cache
+build/
+dist/
+coverage/
