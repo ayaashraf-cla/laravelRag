@@ -269,4 +269,4 @@
     @error('query')
         <p class="mt-2 text-sm dark:text-red-400" style="color: #dc2626 !important;">{{ $message }}</p>
     @enderror
-</div>
+</div> 
