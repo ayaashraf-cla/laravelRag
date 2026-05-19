@@ -4,6 +4,7 @@ namespace AyaAshraf\LaravelRag\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use AyaAshraf\LaravelRag\Enums\DocumentStatus;
 
 class Document extends Model
 {
