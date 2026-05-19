@@ -8,17 +8,7 @@ use Illuminate\Support\Collection;
 use Pgvector\Laravel\Vector;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 
-#[Fillable([
-    'document_id',
-    'position',
-    'content',
-    'content_hash',
-    'embedding',
-    'embedding_model',
-    'embedding_dimensions',
-    'embedded_at',
-    'metadata',
-])]
+
 class DocumentChunk extends Model
 {
     /**
@@ -26,6 +16,17 @@ class DocumentChunk extends Model
      *
      * @return array<string, string>
      */
+    protected $fillable = [
+        'document_id',
+        'position',
+        'content',
+        'content_hash',
+        'embedding',
+        'embedding_model',
+        'embedding_dimensions',
+        'embedded_at',
+        'metadata',
+    ];
     public function getConnectionName(): string
     {
         return config('rag.vector_connection', 'pgsql_vector');
