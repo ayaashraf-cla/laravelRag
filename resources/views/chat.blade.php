@@ -259,7 +259,8 @@
             class="min-w-0 flex-1 rounded-md border-zinc-300 bg-white px-3 py-2 shadow-sm focus:border-zinc-500 focus:outline-hidden focus:ring-1 focus:ring-zinc-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder-zinc-500 dark:focus:border-zinc-400 dark:focus:ring-zinc-400"
             style="color: #09090b !important;"
         >
-        <button type="submit" wire:loading.attr="disabled" class="rounded-md bg-zinc-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-zinc-700 disabled:opacity-60 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">
+        <button type="submit" wire:loading.attr="disabled" class="rounded bg-blue-500 px-4 py-2 text-sm font-medium text-white disabled:cursor-not-allowed disabled:opacity-60 dark:bg-white dark:text-zinc-900"
+>
             <span wire:loading.remove>Ask AI</span>
             <span wire:loading>Thinking...</span>
         </button>
