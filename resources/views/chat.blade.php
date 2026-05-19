@@ -121,7 +121,7 @@
                         </div>
                     </div>
                 </div>
-                <div x-show="loaded" class="lg:col-span-3 grid grid-cols-1 gap-3 lg:grid-cols-3">
+                <div x-show="loaded" class="lg:col-span-3 grid grid-cols-3 gap-3">
                     <!-- Column 1: Performance Timeline -->
                     <article class="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900">
                     <div class="mb-4 flex items-start justify-between gap-3">
@@ -259,8 +259,8 @@
             class="min-w-0 flex-1 rounded-md border-zinc-300 bg-white px-3 py-2 shadow-sm focus:border-zinc-500 focus:outline-hidden focus:ring-1 focus:ring-zinc-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder-zinc-500 dark:focus:border-zinc-400 dark:focus:ring-zinc-400"
             style="color: #09090b !important;"
         >
-        <button type="submit" wire:loading.attr="disabled" class="rounded bg-blue-500 px-4 py-2 text-sm font-medium text-white disabled:cursor-not-allowed disabled:opacity-60 dark:bg-white dark:text-zinc-900"
->
+        <button type="submit" wire:loading.attr="disabled"     
+                class="rounded bg-blue-500 px-4 py-2 text-sm font-medium text-white disabled:cursor-not-allowed disabled:opacity-60 dark:bg-white dark:text-zinc-900">
             <span wire:loading.remove>Ask AI</span>
             <span wire:loading>Thinking...</span>
         </button>
