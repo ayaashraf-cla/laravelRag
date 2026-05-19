@@ -27,7 +27,6 @@ Publish configuration, migrations, and views:
 ```bash
 php artisan vendor:publish --tag=rag-config
 php artisan vendor:publish --tag=rag-migrations
-php artisan vendor:publish --tag=rag-views
 ```
 
 Run migrations:
@@ -41,16 +40,16 @@ php artisan migrate
 Create a PostgreSQL connection for vectors in `config/database.php`:
 
 ```php
-'pgsql_vector' => [
-    'driver' => 'pgsql',
-    'host' => env('DB_HOST', 'localhost'),
-    'port' => env('DB_PORT', 5432),
-    'database' => env('DB_DATABASE_VECTOR', 'rag_vectors'),
-    'username' => env('DB_USERNAME', 'postgres'),
-    'password' => env('DB_PASSWORD', ''),
-    'charset' => 'utf8',
-    'prefix' => '',
-],
+   'pgsql_vector' => [
+            'driver' => 'pgsql',
+            'host' => env('VECTOR_DB_HOST', 'localhost'),
+            'port' => env('VECTOR_DB_PORT', 5432),
+            'database' => env('VECTOR_DB_DATABASE', 'rag_vectors'),
+            'username' => env('VECTOR_DB_USERNAME', 'postgres'),
+            'password' => env('VECTOR_DB_PASSWORD', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+        ],
 ```
 
 Configure environment variables in `.env`:
