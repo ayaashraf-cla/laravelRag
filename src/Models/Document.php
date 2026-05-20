@@ -18,6 +18,7 @@ class Document extends Model
         'size',
         'documentable_id',
         'documentable_type',
+        'uploaded_by',
         'is_visible',
         'status',
         'extracted_text',

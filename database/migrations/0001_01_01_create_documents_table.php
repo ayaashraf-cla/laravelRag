@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('mime_type')->nullable();
             $table->unsignedBigInteger('size')->default(0);
             $table->nullableMorphs('documentable');
+            $table->unsignedBigInteger('uploaded_by')->nullable();
             $table->boolean('is_visible')->default(false);
             $table->string('status')->default('queued')->index();
             $table->longText('extracted_text')->nullable();

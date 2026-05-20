@@ -27,6 +27,8 @@ class DocumentUploader extends Component
 
     public ?int $documentableId = null;
 
+    public ?int $uploadedBy = null;
+
     // When false, the extracted text is NOT displayed in the UI after upload.
     // The document record is still created and processed for RAG; only the display is suppressed.
     public bool $isVisible = true;
@@ -61,6 +63,7 @@ class DocumentUploader extends Component
                 'size'              => $this->storedSize($disk, $path),
                 'documentable_type' => $this->documentableType,
                 'documentable_id'   => $this->documentableId,
+                'uploaded_by'       => $this->uploadedBy,
                 'is_visible'        => $this->isVisible,
                 'status'            => DocumentStatus::QUEUED,
             ]);
