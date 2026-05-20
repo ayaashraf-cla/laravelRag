@@ -154,12 +154,22 @@
                             <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                             Stored {{ $processedDocument['chunk_count'] }} embedded chunk(s) for RAG.
                         </div>
-                        <div class="border-t border-slate-100 p-4">
-                            <textarea
-                                class="w-full resize-none rounded-xl border border-slate-200 bg-slate-50 p-3 font-mono text-xs text-slate-700 focus:border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                                rows="10"
-                                readonly>{{ $processedDocument['text'] }}</textarea>
-                        </div>
+                        @if ($processedDocument['is_visible'])
+                            <div class="border-t border-slate-100 p-4">
+                                <textarea
+                                    class="w-full resize-none rounded-xl border border-slate-200 bg-slate-50 p-3 font-mono text-xs text-slate-700 focus:border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                    rows="10"
+                                    readonly>{{ $processedDocument['text'] }}</textarea>
+                            </div>
+                        @else
+                            <div class="flex items-center gap-2 border-t border-slate-100 bg-slate-50 px-4 py-3 text-sm text-slate-500">
+                                <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                                    <line x1="1" y1="1" x2="23" y2="23"/>
+                                </svg>
+                                Extracted content is hidden for this document.
+                            </div>
+                        @endif
                     @endif
 
                 </div>
