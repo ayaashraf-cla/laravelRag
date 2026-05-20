@@ -24,7 +24,9 @@ class Document extends Model
         'extracted_text',
         'error',
         'processed_at',
-        'specified_name'
+        'specified_name',
+        'is_required'
+
     ];
 
     public function getConnectionName(): string
@@ -38,6 +40,7 @@ class Document extends Model
             'processed_at' => 'datetime',
             'status'       => DocumentStatus::class,
             'is_visible'   => 'boolean',
+            'is_required'   => 'boolean',
         ];
     }
 
