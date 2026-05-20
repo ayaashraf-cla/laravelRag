@@ -24,6 +24,7 @@ class Document extends Model
         'extracted_text',
         'error',
         'processed_at',
+        'specified_name'
     ];
 
     public function getConnectionName(): string

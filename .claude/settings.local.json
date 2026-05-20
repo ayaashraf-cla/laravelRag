@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/projects/nora/nora/**)",
+      "Bash(composer update *)"
+    ]
+  }
+}
