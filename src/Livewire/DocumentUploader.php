@@ -108,6 +108,8 @@ class DocumentUploader extends Component
 
         $this->reset('documents');
 
+        $this->dispatch('documentUploaded');
+
         session()->flash('message', count($this->documentIds).' document(s) queued for processing.');
     }
 
