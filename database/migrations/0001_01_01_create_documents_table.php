@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('size')->default(0);
             $table->nullableMorphs('documentable');
             $table->unsignedBigInteger('uploaded_by')->nullable();  
-            $table->string('specified_name');
+            $table->string('specified_name')->nullable();
             $table->boolean('is_required')->default(false);
             $table->boolean('is_visible')->default(false);
             $table->string('status')->default('queued')->index();

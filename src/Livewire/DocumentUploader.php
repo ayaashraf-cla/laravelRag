@@ -29,6 +29,7 @@ class DocumentUploader extends Component
 
     public ?int $uploadedBy = null;
     public ?string $specifiedName = null;
+    public ?string $sectionId = null;
     // When false, the extracted text is NOT displayed in the UI after upload.
     // The document record is still created and processed for RAG; only the display is suppressed.
     public bool $isVisible = true;
@@ -55,20 +56,50 @@ class DocumentUploader extends Component
             $path = $uploadedDocument->store('rag-sources', 'local');
             $disk = Storage::disk('local');
 
-            $document = Document::create([
-                'original_name'     => $uploadedDocument->getClientOriginalName(),
-                'disk'              => 'local',
-                'path'              => $path,
-                'mime_type'         => $this->storedMimeType($disk, $path),
-                'size'              => $this->storedSize($disk, $path),
-                'documentable_type' => $this->documentableType,
-                'documentable_id'   => $this->documentableId,
-                'uploaded_by'       => $this->uploadedBy,
-                'specified_name'       => $this->specifiedName,
-                'is_required'       => $this->isRequired,
-                'is_visible'        => $this->isVisible,
-                'status'            => DocumentStatus::QUEUED,
-            ]);
+            $existing = $this->specifiedName !== null
+                ? Document::query()
+                    ->where('documentable_type', $this->documentableType)
+                    ->where('documentable_id', $this->documentableId)
+                    ->where('specified_name', $this->specifiedName)
+                    ->first()
+                : null;
+
+            if ($existing !== null) {
+                $existing->chunks()->delete();
+                Storage::disk($existing->disk)->delete($existing->path);
+
+                $existing->update([
+                    'original_name'  => $uploadedDocument->getClientOriginalName(),
+                    'disk'           => 'local',
+                    'path'           => $path,
+                    'mime_type'      => $this->storedMimeType($disk, $path),
+                    'size'           => $this->storedSize($disk, $path),
+                    'uploaded_by'    => $this->uploadedBy,
+                    'is_required'    => $this->isRequired,
+                    'is_visible'     => $this->isVisible,
+                    'status'         => DocumentStatus::QUEUED,
+                    'extracted_text' => null,
+                    'error'          => null,
+                    'processed_at'   => null,
+                ]);
+
+                $document = $existing->fresh();
+            } else {
+                $document = Document::create([
+                    'original_name'     => $uploadedDocument->getClientOriginalName(),
+                    'disk'              => 'local',
+                    'path'              => $path,
+                    'mime_type'         => $this->storedMimeType($disk, $path),
+                    'size'              => $this->storedSize($disk, $path),
+                    'documentable_type' => $this->documentableType,
+                    'documentable_id'   => $this->documentableId,
+                    'uploaded_by'       => $this->uploadedBy,
+                    'specified_name'    => $this->specifiedName,
+                    'is_required'       => $this->isRequired,
+                    'is_visible'        => $this->isVisible,
+                    'status'            => DocumentStatus::QUEUED,
+                ]);
+            }
 
             $this->documentIds[] = $document->id;
 
@@ -120,6 +151,22 @@ class DocumentUploader extends Component
             ])
             ->all();
     }
+
+    // public function checkProcessing(): void
+    // {
+    //     if ($this->sectionId === null || $this->documentIds === []) {
+    //         return;
+    //     }
+
+    //     $terminal = ['processed', 'empty', 'failed'];
+    //     $docs = $this->processedDocuments();
+
+    //     $allDone = $docs !== [] && count(array_filter($docs, fn($d) => !in_array($d['status'], $terminal, true))) === 0;
+
+    //     if ($allDone) {
+    //         $this->dispatch('markUploaded', sectionId: $this->sectionId);
+    //     }
+    // }
 
     public function render()
     {
