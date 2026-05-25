@@ -19,6 +19,7 @@ class Document extends Model
         'documentable_id',
         'documentable_type',
         'uploaded_by',
+        'section_id',
         'is_visible',
         'status',
         'extracted_text',

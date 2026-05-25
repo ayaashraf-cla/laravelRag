@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('mime_type')->nullable();
             $table->unsignedBigInteger('size')->default(0);
             $table->nullableMorphs('documentable');
-            $table->unsignedBigInteger('uploaded_by')->nullable();  
+            $table->unsignedBigInteger('uploaded_by')->nullable();
+            $table->string('section_id')->nullable();
             $table->string('specified_name')->nullable();
             $table->boolean('is_required')->default(false);
             $table->boolean('is_visible')->default(false);
