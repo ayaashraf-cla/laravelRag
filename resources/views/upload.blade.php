@@ -243,6 +243,8 @@
             let isClearingAfterSave = false;
             let shouldSyncAfterUpload = false;
             let uploadVersion = 0;
+            let lastSyncedFiles = null;
+            let addfileDebounce = null;
 
             function updateButtonState() {
                 submitBtn.disabled = isUploading || isSubmitting || !isUploadReady;
@@ -257,13 +259,14 @@
 
             function syncFiles() {
                 const files = currentFiles();
-                uploadVersion++;
                 isUploadReady = false;
 
                 if (files.length === 0) {
                     $wire.$set('documents', []);
                     isUploading = false;
                     shouldSyncAfterUpload = false;
+                    lastSyncedFiles = null;
+                    uploadVersion++;
                     updateButtonState();
                     return;
                 }
@@ -274,8 +277,21 @@
                     return;
                 }
 
+                // Skip re-upload if the exact same file objects were already uploaded.
+                // This prevents a double-upload when rapid addfile events cause
+                // shouldSyncAfterUpload=true even though the file list didn't change.
+                if (lastSyncedFiles !== null &&
+                    files.length === lastSyncedFiles.length &&
+                    files.every((f, i) => f === lastSyncedFiles[i])) {
+                    isUploadReady = true;
+                    updateButtonState();
+                    return;
+                }
+
+                uploadVersion++;
                 isUploading = true;
                 shouldSyncAfterUpload = false;
+                lastSyncedFiles = files;
                 updateButtonState();
 
                 const startedVersion = uploadVersion;
@@ -287,6 +303,7 @@
                         isUploading = false;
                         isUploadReady = startedVersion === uploadVersion && !shouldSyncAfterUpload;
                         if (shouldSyncAfterUpload) {
+                            shouldSyncAfterUpload = false;
                             syncFiles();
                             return;
                         }
@@ -296,6 +313,7 @@
                         isUploading = false;
                         isUploadReady = false;
                         shouldSyncAfterUpload = false;
+                        lastSyncedFiles = null;
                         updateButtonState();
                     },
                     function() {
@@ -305,6 +323,7 @@
                         isUploading = false;
                         isUploadReady = false;
                         shouldSyncAfterUpload = false;
+                        lastSyncedFiles = null;
                         updateButtonState();
                     },
                     false,
@@ -315,13 +334,19 @@
 
             pond.on('addfile', (error, file) => {
                 if (error) return; // Ignore files that failed validation
-                syncFiles();
+                // Debounce so that dropping N files at once only triggers one upload cycle.
+                clearTimeout(addfileDebounce);
+                addfileDebounce = setTimeout(syncFiles, 50);
             });
             pond.on('removefile', function() {
                 if (isClearingAfterSave) return;
+                lastSyncedFiles = null;
                 syncFiles();
             });
-            pond.on('reorderfiles', syncFiles);
+            pond.on('reorderfiles', function() {
+                lastSyncedFiles = null;
+                syncFiles();
+            });
 
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
