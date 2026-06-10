@@ -85,8 +85,8 @@ return [
     |
     */
 
-    'embedding_dimensions' => (int) env('GEMINI_EMBEDDING_DIMENSIONS', 1536),
-    'embedding_model'      => env('GEMINI_EMBEDDING_MODEL', 'gemini-embedding-001'),
+    'embedding_dimensions' => (int) env('EMBEDDING_DIMENSIONS', 1536),
+    'embedding_model'      => env('EMBEDDING_MODEL', 'text-embedding-3-small'),
 
     /*
     |--------------------------------------------------------------------------
@@ -148,8 +148,8 @@ return [
     */
 
     'chat' => [
-        'provider' => env('RAG_CHAT_PROVIDERS', 'gemini'),
-        'model'    => env('RAG_CHAT_MODEL', 'gemini-2.0-flash'),
+        'provider' => env('RAG_CHAT_PROVIDERS', 'openai'),
+        'model'    => env('RAG_CHAT_MODEL', 'gpt-4-mini'),
         'timeout'  => (int) env('RAG_CHAT_TIMEOUT', 40),
     ],
 
