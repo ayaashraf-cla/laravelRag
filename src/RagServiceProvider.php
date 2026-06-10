@@ -35,8 +35,6 @@ class RagServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        $this->suppressPgvectorVendorMigrationPath();
-
         $this->loadMigrationsFrom($this->packagePath('database/migrations'));
         $this->loadViewsFrom($this->packagePath('resources/views'), 'rag');
 
@@ -44,14 +42,12 @@ class RagServiceProvider extends ServiceProvider
             $this->registerLivewireComponents();
         }
 
-        // Register package Artisan commands
         if ($this->app->runningInConsole()) {
             $this->commands([
                 \AyaAshraf\LaravelRag\Commands\EmbedDocumentsCommand::class,
             ]);
         }
 
-        // publishes() MUST live in boot(), not register().
         $this->publishes([
             $this->packagePath('config/rag.php') => config_path('rag.php'),
         ], 'rag-config');
@@ -63,50 +59,26 @@ class RagServiceProvider extends ServiceProvider
         $this->publishes([
             $this->packagePath('resources/views') => resource_path('views/vendor/rag'),
         ], 'rag-views');
+
+        // pgvector/pgvector auto-registers a migration that runs CREATE/DROP EXTENSION
+        // on whatever the default connection is — which may be MySQL and will fail.
+        // We ship an override file with the same timestamp that guards on the driver.
+        // Registering the override path inside booted() ensures it is added LAST to
+        // the migrator's paths array. Laravel's getMigrationFiles() uses keyBy(name),
+        // so the last entry for a given filename wins — our file beats pgvector's.
+        $this->app->booted(function () {
+            if ($this->app->runningInConsole() && $this->app->bound('migrator')) {
+                $this->app->make('migrator')->path(
+                    $this->packagePath('database/migration_overrides')
+                );
+            }
+        });
     }
 
     protected function registerLivewireComponents(): void
     {
         Livewire::component('rag-chat', ChatComponent::class);
         Livewire::component('rag-uploader', DocumentUploader::class);
-    }
-
-    protected function suppressPgvectorVendorMigrationPath(): void
-    {
-        if (! $this->app->runningInConsole() || ! $this->app->bound('migrator')) {
-            return;
-        }
-
-        $migrator = $this->app['migrator'];
-
-        if (! method_exists($migrator, 'paths')) {
-            return;
-        }
-
-        $paths = $migrator->paths();
-        $filtered = array_filter($paths, fn (string $path) => ! preg_match('#[\\/](vendor)[\\/].*pgvector[\\/].*database[\\/]migrations#i', $path));
-
-        if (count($filtered) === count($paths)) {
-            return;
-        }
-
-        $this->setMigratorPaths($migrator, array_values($filtered));
-    }
-
-    protected function setMigratorPaths(object $migrator, array $paths): void
-    {
-        $reflection = new \ReflectionObject($migrator);
-
-        foreach (['paths', 'migrationPaths'] as $propertyName) {
-            if (! $reflection->hasProperty($propertyName)) {
-                continue;
-            }
-
-            $property = $reflection->getProperty($propertyName);
-            $property->setAccessible(true);
-            $property->setValue($migrator, $paths);
-            return;
-        }
     }
 
     protected function packagePath(string $path = ''): string
