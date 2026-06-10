@@ -209,7 +209,7 @@ class CustomEmbeddingGenerator implements EmbeddingGenerator
 
     public function dimensions(): int
     {
-        return 768;
+        return 1536;
     }
 }
 

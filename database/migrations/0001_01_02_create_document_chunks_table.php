@@ -13,9 +13,18 @@ return new class extends Migration
     public function up(): void
     {
         $vectorConn = config('rag.vector_connection', 'pgsql_vector');
+        $vectorConnection = DB::connection($vectorConn);
+
+        if ($vectorConnection->getDriverName() !== 'pgsql') {
+            throw new \RuntimeException(sprintf(
+                'The Laravel RAG document_chunks migration requires a PostgreSQL connection for vector storage. Connection [%s] uses driver [%s]. Set rag.vector_connection to a PostgreSQL connection.',
+                $vectorConn,
+                $vectorConnection->getDriverName()
+            ));
+        }
 
         // Enable pgvector extension (PostgreSQL only)
-        DB::connection($vectorConn)->statement('CREATE EXTENSION IF NOT EXISTS vector;');
+        $vectorConnection->statement('CREATE EXTENSION IF NOT EXISTS vector;');
 
         $dimensions = config('rag.embedding_dimensions', 1536);
 
