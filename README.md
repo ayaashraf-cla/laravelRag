@@ -29,6 +29,8 @@ php artisan vendor:publish --tag=rag-config
 php artisan vendor:publish --tag=rag-migrations
 ```
 
+> Note: The package suppresses the redundant `pgvector` vendor migration path so your own `document_chunks` migration remains the only migration path for pgvector extension creation. This avoids running the pgvector migration on the wrong default database connection.
+
 Run migrations:
 
 ```bash
@@ -58,7 +60,7 @@ Configure environment variables in `.env`:
 EMBEDDING_PROVIDER=gemini
 GEMINI_API_KEY=your-key-here
 GEMINI_EMBEDDING_MODEL=gemini-embedding-001
-GEMINI_EMBEDDING_DIMENSIONS=768
+GEMINI_EMBEDDING_DIMENSIONS=1536
 
 RAG_VECTOR_CONNECTION=pgsql_vector
 RAG_DOCUMENTS_CONNECTION=mysql

@@ -52,17 +52,22 @@ class DocumentUploader extends Component
 
         $this->reset('documentIds');
 
+        $specifiedName = $this->specifiedName;
+
         foreach ($this->documents as $uploadedDocument) {
             $path = $uploadedDocument->store('rag-sources', 'local');
             $disk = Storage::disk('local');
 
-            $existing = $this->specifiedName !== null
+            $existing = $specifiedName !== null
                 ? Document::query()
                     ->where('documentable_type', $this->documentableType)
                     ->where('documentable_id', $this->documentableId)
-                    ->where('specified_name', $this->specifiedName)
+                    ->where('specified_name', $specifiedName)
                     ->first()
                 : null;
+
+            // Only replace the first match; subsequent files create new records.
+            $specifiedName = null;
 
             if ($existing !== null) {
                 $existing->chunks()->delete();

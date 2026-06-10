@@ -35,6 +35,8 @@ class RagServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        $this->suppressPgvectorVendorMigrationPath();
+
         $this->loadMigrationsFrom($this->packagePath('database/migrations'));
         $this->loadViewsFrom($this->packagePath('resources/views'), 'rag');
 
@@ -67,6 +69,44 @@ class RagServiceProvider extends ServiceProvider
     {
         Livewire::component('rag-chat', ChatComponent::class);
         Livewire::component('rag-uploader', DocumentUploader::class);
+    }
+
+    protected function suppressPgvectorVendorMigrationPath(): void
+    {
+        if (! $this->app->runningInConsole() || ! $this->app->bound('migrator')) {
+            return;
+        }
+
+        $migrator = $this->app['migrator'];
+
+        if (! method_exists($migrator, 'paths')) {
+            return;
+        }
+
+        $paths = $migrator->paths();
+        $filtered = array_filter($paths, fn (string $path) => ! preg_match('#[\\/](vendor)[\\/].*pgvector[\\/].*database[\\/]migrations#i', $path));
+
+        if (count($filtered) === count($paths)) {
+            return;
+        }
+
+        $this->setMigratorPaths($migrator, array_values($filtered));
+    }
+
+    protected function setMigratorPaths(object $migrator, array $paths): void
+    {
+        $reflection = new \ReflectionObject($migrator);
+
+        foreach (['paths', 'migrationPaths'] as $propertyName) {
+            if (! $reflection->hasProperty($propertyName)) {
+                continue;
+            }
+
+            $property = $reflection->getProperty($propertyName);
+            $property->setAccessible(true);
+            $property->setValue($migrator, $paths);
+            return;
+        }
     }
 
     protected function packagePath(string $path = ''): string
