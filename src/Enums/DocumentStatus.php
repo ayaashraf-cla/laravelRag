@@ -1,6 +1,6 @@
 <?php
 
-namespace AyaAshraf\LaravelRag\Enums;
+namespace CLA\LaravelRag\Enums;
 
 enum DocumentStatus: string
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace AyaAshraf\LaravelRag\Tests\Unit;
+namespace CLA\LaravelRag\Tests\Unit;
 
-use AyaAshraf\LaravelRag\Services\DocumentChunker;
-use AyaAshraf\LaravelRag\Tests\TestCase;
+use CLA\LaravelRag\Services\DocumentChunker;
+use CLA\LaravelRag\Tests\TestCase;
 
 class DocumentChunkerTest extends TestCase
 {

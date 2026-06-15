@@ -1,6 +1,6 @@
 <?php
 
-namespace AyaAshraf\LaravelRag\Services;
+namespace CLA\LaravelRag\Services;
 
 /**
  * Base interface for embedding generation.

@@ -1,5 +1,5 @@
 {
-  "name": "ayaashraf/laravel-rag",
+  "name": "cla/laravel-rag",
   "description": "A production-ready RAG (Retrieval-Augmented Generation) package for Laravel using pgvector and Livewire",
   "type": "library",
   "license": "MIT",
@@ -29,18 +29,18 @@
   },
   "autoload": {
     "psr-4": {
-      "AyaAshraf\\LaravelRag\\": "src/"
+      "CLA\\LaravelRag\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "AyaAshraf\\LaravelRag\\Tests\\": "tests/"
+      "CLA\\LaravelRag\\Tests\\": "tests/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "AyaAshraf\\LaravelRag\\RagServiceProvider"
+        "CLA\\LaravelRag\\RagServiceProvider"
       ]
     }
   },

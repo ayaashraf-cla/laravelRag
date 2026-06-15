@@ -1,6 +1,6 @@
 <?php
 
-namespace AyaAshraf\LaravelRag\Agents;
+namespace CLA\LaravelRag\Agents;
 
 use Closure;
 use Illuminate\Support\Arr;
@@ -12,9 +12,9 @@ use Laravel\Ai\Contracts\Tool;
 use Laravel\Ai\Promptable;
 use Laravel\Ai\Tools\SimilaritySearch;
 use Stringable;
-use AyaAshraf\LaravelRag\Models\Document;
-use AyaAshraf\LaravelRag\Models\DocumentChunk;
-use AyaAshraf\LaravelRag\Services\EmbeddingGenerator;
+use CLA\LaravelRag\Models\Document;
+use CLA\LaravelRag\Models\DocumentChunk;
+use CLA\LaravelRag\Services\EmbeddingGenerator;
 
 class DocumentSearchAgent implements Agent, Conversational, HasTools
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace AyaAshraf\LaravelRag;
+namespace CLA\LaravelRag;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use AyaAshraf\LaravelRag\Livewire\ChatComponent;
-use AyaAshraf\LaravelRag\Livewire\DocumentUploader;
-use AyaAshraf\LaravelRag\Services\AiSdkEmbeddingGenerator;
-use AyaAshraf\LaravelRag\Services\DocumentChunker;
-use AyaAshraf\LaravelRag\Services\EmbeddingGenerator;
+use CLA\LaravelRag\Livewire\ChatComponent;
+use CLA\LaravelRag\Livewire\DocumentUploader;
+use CLA\LaravelRag\Services\AiSdkEmbeddingGenerator;
+use CLA\LaravelRag\Services\DocumentChunker;
+use CLA\LaravelRag\Services\EmbeddingGenerator;
 
 class RagServiceProvider extends ServiceProvider
 {
@@ -44,7 +44,7 @@ class RagServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
-                \AyaAshraf\LaravelRag\Commands\EmbedDocumentsCommand::class,
+                \CLA\LaravelRag\Commands\EmbedDocumentsCommand::class,
             ]);
         }
 

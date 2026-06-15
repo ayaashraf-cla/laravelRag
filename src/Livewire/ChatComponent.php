@@ -1,13 +1,13 @@
 <?php
 
-namespace AyaAshraf\LaravelRag\Livewire;
+namespace CLA\LaravelRag\Livewire;
 
 use Illuminate\Support\Collection;
 use Laravel\Ai\Streaming\Events\TextDelta;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Throwable;
-use AyaAshraf\LaravelRag\Agents\DocumentSearchAgent;
+use CLA\LaravelRag\Agents\DocumentSearchAgent;
 
 #[Layout('rag::components.layouts.app')]
 class ChatComponent extends Component

@@ -1,8 +1,8 @@
 <?php
 
-namespace AyaAshraf\LaravelRag\Traits;
+namespace CLA\LaravelRag\Traits;
 
-use AyaAshraf\LaravelRag\Models\Document;
+use CLA\LaravelRag\Models\Document;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait HasDocuments

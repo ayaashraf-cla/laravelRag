@@ -1,12 +1,12 @@
 <?php
 
-namespace AyaAshraf\LaravelRag\Models;
+namespace CLA\LaravelRag\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use AyaAshraf\LaravelRag\Enums\DocumentStatus;
+use CLA\LaravelRag\Enums\DocumentStatus;
 
 class Document extends Model
 {

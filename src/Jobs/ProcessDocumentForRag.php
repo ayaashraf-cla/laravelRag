@@ -1,15 +1,15 @@
 <?php
 
-namespace AyaAshraf\LaravelRag\Jobs;
+namespace CLA\LaravelRag\Jobs;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Storage;
 use Throwable;
-use AyaAshraf\LaravelRag\Enums\DocumentStatus;
-use AyaAshraf\LaravelRag\Models\Document;
-use AyaAshraf\LaravelRag\Services\DocumentEmbeddingIndexer;
-use AyaAshraf\LaravelRag\Services\DocumentTextExtractor;
+use CLA\LaravelRag\Enums\DocumentStatus;
+use CLA\LaravelRag\Models\Document;
+use CLA\LaravelRag\Services\DocumentEmbeddingIndexer;
+use CLA\LaravelRag\Services\DocumentTextExtractor;
 
 class ProcessDocumentForRag implements ShouldQueue
 {

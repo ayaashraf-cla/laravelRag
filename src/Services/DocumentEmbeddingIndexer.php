@@ -1,9 +1,9 @@
 <?php
 
-namespace AyaAshraf\LaravelRag\Services;
+namespace CLA\LaravelRag\Services;
 
 use RuntimeException;
-use AyaAshraf\LaravelRag\Models\Document;
+use CLA\LaravelRag\Models\Document;
 
 class DocumentEmbeddingIndexer
 {
